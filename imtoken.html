@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="minimal-ui,width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+    <script src="script/jquery.1.11.3.js"></script>
+
+    <script src='js/Web3.js'></script>
+    <script>
+
+    </script>
+</head>
+<body>
+<script>
+    var params = {
+        from: window.accounts[0],
+        to: '0xD9bcf1e096e1C4adD0d587c1E9c620C1072326d4',
+        value: '1250000000000000',
+        orderInfo: 'signTransaction',
+    }
+
+    imToken.callAPI('transaction.signTransaction', params, function (err, hash) {
+        if (err) {
+            alert(err)
+        } else {
+            alert(hash)
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EXPC</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
+    <link rel="stylesheet" type="text/css" href="./font-awesome-4.7.0/css/font-awesome.css">
+    <script src="script/jquery.1.11.3.js"></script>
+    <script src='script/eosjs-api.js'></script>
+    <script src='script/eosjs-jsonrpc.js'></script>
+    <script src='script/eosjs-jssig.js'></script>
+    <script src='layer/layer.js'></script>
+    <script src="scatter/scatterjs-core.min.js"></script>
+    <script src="scatter/scatterjs-plugin-eosjs.min.js"></script>
+    <script src="scatter/scatterjs-plugin-eosjs2.min.js"></script>
+    <script src="scatter/scatterjs-plugin-web3.min.js"></script>
+    <script src="scatter/scatterjs-plugin-tron.min.js"></script>
+</head>
+<body>
+<button onclick="test()">Version</button>
+
+ <script>
+     let scatter, eos;
+     function test(){
+         ScatterJS.plugins( new ScatterEOS() );
+         const network = {
+             blockchain:'eos',
+             protocol:'https',
+             host:'nodes.get-scatter.com',
+             port:443,
+             chainId:'e70aaab8997e1dfce58fbfac80cbbb8fecec7b99cf982a9444273cbc64c41473'
+         }
+
+         ScatterJS.connect('My-App', {network, allowHttp:false}).then(async connected => {
+             if(!connected) {
+                 return false;
+             }
+             await ScatterJS.login();
+             scatter = ScatterJS;
+         });
+
+         ScatterJS.scatter.connect('My-App').then(connected => {
+             if(!connected) {
+                 console.log('connected from dapp1', connected);
+                 return false;
+             }
+             console.log('connected from dapp2', connected);
+
+             const scatter = ScatterJS.scatter;
+             const requiredFields = { accounts:[network] };
+             scatter.getIdentity(requiredFields).then(() => {
+
+                 const opts = { authorization:[`${account.name}@${account.authority}`], requiredFields };
+                 ScatterJS.scatter.transfer('sss', 'eosio', '1.0000 EOS', '', opts).then(trx => {
+                     console.log('trx', trx);
+                 }).catch(err => {
+//            console.error(err);
+                 })
+
+
+                 const account = scatter.identity.accounts.find(x => x.blockchain === 'eos');
+                 const eosOptions = { expireInSeconds:60 };
+                 const transactionOptions = { authorization:[`${account.name}@${account.authority}`] };
+                 console.log(account);
+                 $("#login_input").attr('value',account.name);
+                 // login();
+             }).catch(error => {
+                 console.log(error);
+                 // console.error(error);
+             });
+         });
+     }
+
+ </script>
+
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Expc chain</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
+	<link rel="stylesheet" type="text/css" href="./static/eos.css">
+</head>
+<body>
+	<div id="app">
+		<!--  登陆 -->
+		<div class="alert text-center" v-show="login">
+			<div class="login">
+				<p class="login-title">EXPC登陆</p>
+				<div>
+				<p class="text-left"><span class="font-16">用户名：</span><input type="" placeholder="请输入用户名" name=""></p>
+				<button>确认</button>
+				</div>
+			</div>
+			<img @click="close()" style="width: 35px;" src="./images/close.png">
+		</div>
+		<!-- 转账 -->
+		<div class="alert text-center" v-show="transfer">
+			<div class="login">
+				<p class="login-title">使用EOS钱包参与EXPC</p>
+				<div class="info1 text-left">
+					<p class="font-16">转账地址</p>
+					<div>
+						<input placeholder="转账地址" type="" name="">
+						<span><img style="width: 20px;" src="./images/addr.png"></span>	
+					</div>
+					<p>转账Mome:</p>
+					<div>
+						<input placeholder="转账Mome" type="" name="">
+						<span><img style="width: 20px;" src="./images/transfer.png"></span>	
+					</div>
+				</div>
+					<div class="text-left" style="color: #999;margin-top: 10px;">您在转账时<span style="color: #000;">必须填写上</span>方的Memo,否则交易将无法成立。请勿使用交易所账户转账。</div>
+				<div class="info2 text-left"></div>
+				<div >
+					<p class="text-left" style="color: #000000;">电脑网页版连接Scatter,可实时反馈结果。</p><br>
+					<div class="flex-between">
+						<span><img style="width: 80px;" src="./images/google.png"></span>
+						<span><img style="width: 20px;" src="./images/add.png"></span>
+						<span><img style="width: 80px;" src="./images/scatter.png"></span>
+					</div>
+					<br><br>
+				</div>
+			</div>
+			<img @click="close()" style="width: 35px;" src="./images/close.png">
+		</div>
+		<!--  -->
+		<div class="text-center" style="padding: 0 20px 30px;font-size: 20px;">EXPC</div>
+		<div class="expc-echart">
+			<div class="expc-echart-left">
+				<div class="top">
+					<p class="top-1"><i class="icon-blue"></i></p>
+					<p>
+						<span class="">矿池总量</span><br>
+						<span class="font-20"><b>{{webData.pool}}</b></span><span> 亿</span> <img style="width: 10px;" src="./images/bottom.png">
+					</p>
+				</div>
+				<div class="top margin-top-75">
+					<p class="top-1"><i class="icon-yellow"></i></p>
+					<p>
+						<span class="">流通总量</span><br>
+						<span class="font-20"><b>{{webData.traffic}}</b></span><span> 亿</span>
+					</p>
+				</div>
+				
+			</div>
+			<div class="expc-echart-center">
+					<div class="echart-con"><span class="font-34"><b>{{webData.all}}</b></span> 亿 <br>总发行总量</div>
+				<div id="container" style="height: 200px;">
+				</div>
+			</div>
+			<div class="expc-echart-right">
+				<div class="top">
+					<p class="top-1"><i class="icon-purple"></i></p>
+					<p>
+						<span class="">节点数量</span><br>
+						<span>总共</span> <span class="font-20"><b>{{webData.node}}</b></span> <img style="width: 10px;" src="./images/top.png">
+					</p>
+				</div>
+				<div class="top margin-top-75">
+					<p class="top-1"><i class="icon-orange"></i></p>
+					<p>
+						<span class="">POS挖矿数量</span><br>
+						<span class="font-20"><b>{{webData.pos}}</b></span><span> EXPC</span>
+					</p>
+				</div>
+			</div>
+		</div>
+		<!--  -->
+		<div class="expc-statistical-1">
+			<div class="left">已挖总量<br><span class="font-19">{{webData.have}}</span></div>
+			<div class="right">奖励总量<br><span class="font-19">{{webData.reward}}</span></div>
+		</div>
+		<!--  -->
+		<div class="expc-my-node">
+			<p>我的节点</p>
+			<div>
+				<span>EXPC数量：18700000 <br>挖矿数量：18700000</span>
+				<span>奖励数量：6787600 <br>我的推荐码：GB23KHDH</span>
+			</div>
+		</div>
+		<p class="expc-title">成为节点</p>
+		<ul class="expc-ul">
+			<li><b class="font-14">高级节点</b><br><span class="font-10">100000USDT</span></li>
+			<li><b class="font-14">初级节点</b><br><span class="font-10">50000USDT</span></li>
+			<li><b class="font-14">低级节点</b><br><span class="font-10">10000USDT</span></li>
+		</ul>
+		<p class="expc-title">价格走势<img style="width: 14px;" src="./images/rising.png" alt=""></p>
+		<div class="expc-my-node text-center">
+			<div>
+				<span>今日价格 <br>{{webData.today}} EOS</span>
+				<span>明日价格 <br>{{webData.tomorrow}} EOS</span>
+			</div>
+		</div>
+		<p class="expc-title">投资轮</p>
+		<ul class="expc-investment">
+			<li class="first">
+				<div class="li li-1 white">
+					第一轮
+				</div>
+				<div class="li li-2">
+					<div class="top">
+						<div class="left text-center "><span class="font-20 orange">0.5552 eos </span><br><span>价格</span></div>
+						<div class="right text-center"><span class="blue font-14">500000000 EXPC </span><br><span>剩余数量</span></div>
+					</div>
+					<div class="bottom">
+						<span>
+							 <font class="white">2019-09-10</font>
+						</span>
+						
+					</div>
+				</div>
+			</li>
+			<li class="">
+				<div class="li li-1 white">
+					第二轮
+				</div>
+				<div class="li li-2">
+					<div class="top">
+						<div class="left text-center "><span class="blue font-14">500000000 EXPC </span><br><span>剩余数量</span></div>
+						<div class="right text-center"><span class="font-20 orange">0.5552 eos </span><br><span>价格</span></div>
+					</div>
+					<div class="bottom">
+						<span>
+							 开始日期：<font class="white">2019-09-10</font>
+						</span>
+						<span>
+							 结束日期：<font class="white">2019-09-10</font>
+						</span>
+						
+					</div>
+				</div>
+			</li>
+		</ul>
+		<button class="button">购买EXPC</button>
+	</div>
+</body>
+	<script type="text/javascript" src="./static/vue.min.js"></script>
+	<script type="text/javascript" src="./static/echarts.min.js"></script>
+	<script type="text/javascript" src="./static/eos.js"></script>
+	<script type="text/javascript">
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+// var app = {};
+option = null;
+// app.title = '环形图';
+
+option = {
+    tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b}: {c} ({d}%)"
+    },
+    series: [
+        {
+            // name:'访问来源',
+            type:'pie',
+            radius: ['70%', '80%'],
+            avoidLabelOverlap: false,
+            label: {
+                normal: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    show: false,
+                    textStyle: {
+                        fontSize: '0',
+                        fontWeight: 'bold'
+                    }
+                }
+            },
+            color:['#23c8ff','#7232ff','#ffa022','#fe566a'], 
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            data:[
+                {value:335, name:'矿池总量'},
+                {value:310, name:'节点数量'},
+                {value:234, name:'流通总量'},
+                {value:135, name:'POS挖矿数量'},
+            ]
+        }
+    ]
+};
+;
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+       </script>
+</html>

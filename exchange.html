@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
+    <title>进入交易所</title>
+    <script src="script/jquery.1.11.3.js"></script>
+    <script src="jquery.i18n.js/jquery.i18n.js"></script>
+</head>
+<body style="    background: #322762;">
+
+<div style="text-align: center;color:#fff;font-size: 20px;line-height: 200px;">交易所开放倒计时 <span id="surplus"></span> 天</div>
+<script>
+
+    function getTimestamp(d) {
+        return new Date(d).getTime() / 1000;
+    }
+    function currTimestamp() {
+        return Date.parse(new Date()) / 1000;
+    }
+    var end_time='2020-01-01 00:00:00'
+    var curr_time = getTimestamp(end_time) - currTimestamp();
+
+    var day = Math.floor(curr_time/86400);
+    // console.log(day);
+    // console.log(curr_time);
+    $("#surplus").html(day);
+</script>
+</body>
+</html>

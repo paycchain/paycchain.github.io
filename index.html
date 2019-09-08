@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>EXPC</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
+	<link rel="stylesheet" type="text/css" href="./static/eos.css">
+	<link rel="stylesheet" type="text/css" href="./font-awesome-4.7.0/css/font-awesome.css">
+	<script src="script/jquery.1.11.3.js"></script>
+	<script src="js/scatter.min.js"></script>
+	<script src="js/eos.min.js"></script>
+<!--	<script src='script/eosjs-api.js'></script>-->
+<!--	<script src="js/eos.min.js"></script>-->
+	<script src='script/eosjs-jsonrpc.js'></script>
+<!--	<script src='script/eosjs-jssig.js'></script>-->
+	<script src='layer/layer.js'></script>
+<!--	<script src="scatter/scatterjs-core.min.js"></script>-->
+<!--	<script src="scatter/scatterjs-plugin-eosjs.min.js"></script>-->
+<!--	<script src="scatter/scatterjs-plugin-eosjs2.min.js"></script>-->
+<!--	<script src="scatter/scatterjs-plugin-web3.min.js"></script>-->
+<!--	<script src="scatter/scatterjs-plugin-tron.min.js"></script>-->
+
+</head>
+<body>
+<script>
+
+</script>
+<!--1-->
+	<div id="app">
+		<!--<p onclick="scatter_loginout()">loginout scatter</p>-->
+
+		<input type="hidden" id="tran_eos_price">
+		<div style="display: none;" id="alert_login" class=" alert text-center" >
+			<div class="login">
+				<p class="login-title"><span style="line-height: 50px;">EXPC {{languageCon.login}}</span>
+					<span onclick="alert_hide('login');"
+						  style="font-size: 30px;float: right;margin:10px 20px 0 0;" class="fa fa-close"></span></p>
+				<div>
+				<p class="text-left"><span class="font-16">{{languageCon.username}}：</span>
+					<input style="border: none;width: 80%;" type="" id="login_input" placeholder="" name=""></p>
+				<button onclick="login()" id="login_sess">{{languageCon.login}}</button>
+				</div>
+			</div>
+			<!--<img onclick="alert_hide('login');" style="width: 35px;" src="./images/close.png">-->
+		</div>
+
+		<div style="display: none;" id="alert_tran" class="alert text-center">
+			<div class="login">
+				<p class="login-title"><span style="line-height: 50px;">{{languageCon.with_expc}}</span>
+					<span onclick="alert_hide('tran');"
+						style="font-size: 30px;float: right;margin:10px 20px 0 0;" class="fa fa-close"></span></p>
+				<div class="info1 text-left">
+					<p>{{languageCon.amount}}:</p>
+					<div>
+						<input style="margin:5px 0 0 0;" id="eos_price"  placeholder="{{languageCon.amount}}" type="" name="">
+						<span onclick="copy_text('eos_price')"
+							  style="color:#fff;" class="fa fa-copy"></span>
+<!--						<span onclick="copy_text('eos_price')"><img style="width: 20px;" src="./images/addr.png"></span>-->
+					</div>
+					<p class="font-16">{{languageCon.transfer}} {{languageCon.address}}</p>
+					<div>
+						<input placeholder=""   id="tran_address" value="" type="" name="">
+<!--						<span onclick="copy_text('tran_address')"><img style="width: 20px;" src="./images/addr.png"></span>-->
+						<span onclick="copy_text('tran_address')"
+							  style="color:#fff;" class="fa fa-copy"></span>
+					</div>
+					<p>{{languageCon.transfer}} Memo:</p>
+					<div>
+						<input id="tran_memo" placeholder="" type="" name="">
+<!--						<span onclick="copy_text('tran_memo')"><img style="width: 20px;" src="./images/addr.png"></span>-->
+						<span onclick="copy_text('tran_memo')"
+							  style="color:#fff;" class="fa fa-copy"></span>
+					</div>
+
+				</div>
+					<div class="text-left" style="color: #999;margin-top: 10px;"> {{languageCon.you_must1}} <span style="color: #000;"> {{languageCon.you_must2}} </span>
+						{{languageCon.you_must3}} <d style="color:#f00"> {{languageCon.you_must4}}</d></div>
+				<div class="info2 text-left"></div>
+				<div >
+					<p class="text-left" style="color: #000000;">{{languageCon.connected_scatter}}</p><br>
+					<div class="flex-between">
+						<span><img style="width: 80px;" src="./images/google.png"></span>
+						<span><img style="width: 20px;" src="./images/add.png"></span>
+						<span onclick="scatter()"><img style="width: 80px;" src="./images/scatter.png"></span>
+					</div>
+					<br><br>
+				</div>
+			</div>
+			<!--<img onclick="alert_hide('tran')" style="width: 35px;" src="./images/close.png">-->
+		</div>
+		<!--  -->
+		<div class="" style="padding: 20px 0;font-size: 20px;"><b>EXPC</b></div>
+		<div style="padding: 0 0 30px 0;font-size: 14px; color: #6e6e6e;">
+			<a id="white_paper" download href="" style="color:#1c1c1c;text-decoration: none;margin: 0 10px 0 0;">{{languageCon.white_paper}}</a>|
+			<span style="margin: 0 10px;" @click="languageTab('Chinese')">中文</span>|
+			<span style="margin: 0 10px;" @click="languageTab('English')">English</span>
+		</div>
+
+		</ul>
+		<div style="clear: both"></div>
+		<div class="expc-echart">
+			<div class="expc-echart-center">
+					<div class="echart-con"><span style="">
+						<span style="font-size: 30px;"><b id="total_quantity">0</b></span>{{ languageCon.billion }}</span>
+						<span style="font-size:12px;display: block;">{{languageCon.issuance}}</span>
+<!--						<span class="font-20"><b>3</b></span> {{ // languageCon.billion }} <br>-->
+					</div>
+				<div id="container" style="height: 155px;">
+				</div>
+				<div id="" style="text-align:center;margin-top: -25px;padding:10px 0 10px 0 ; ">剩余：<span id="current_quantity"></span> {{ languageCon.billion}}</div>
+			</div>
+			<div class="expc-echart-right">
+				<div class="top">
+					<p class="top-1"><i class="icon-red"></i></p>
+					<p>
+						<span class="">{{ languageCon.pool_total }}</span>
+						<span class="font-20"><b>65</b></span><span> {{ languageCon.billion }}</span> <img style="width: 10px;" src="./images/bottom.png">
+					</p>
+
+				</div>
+				<div class="line-red"></div>
+				<div class="top">
+					<p class="top-1"><i class="icon-green"></i></p>
+					<p>
+						<span onclick="test234()" class="">{{ languageCon.node_number }}</span>
+						<span>{{ languageCon.in_total }}</span> <span class="font-20"><b>193</b></span> <img style="width: 10px;" src="./images/top.png">
+					</p>
+				</div>
+				<div class="line-green"></div>
+				<div class="top">
+					<p class="top-1"><i class="icon-yellow"></i></p>
+					<p>
+						<span class="">{{ languageCon.circulation }}</span>
+						<span class="font-20"><b id="stat_supply">0</b></span><span> {{ languageCon.billion }}</span>
+					</p>
+				</div>
+				<div class="line-yellow"></div>
+				
+				<div class="top">
+					<p class="top-1"><i class="icon-blue"></i></p>
+					<p>
+						<span class="">{{ languageCon.pos_min }}</span>
+						<span class="font-20"><b id="mature_quantity">0</b></span><span> {{ languageCon.thousand}}</span>
+					</p>
+				</div>
+				<div class="line-blue"></div>
+			</div>
+		</div>
+		
+		<div class="expc-statistical-1">
+			<div style="margin:20px 15px;border-radius: 10px;box-shadow: 0 0 7px rgba(0,0,0,0.1);text-align:center;font-size:16px;padding:15px 0 17px 0 ; ">
+			<img style="position: relative;top: 4px;width: 18px;" src="./images/time.png">
+			<span id="SecondToDate"
+				 >
+			</span>
+			</div>
+
+			<div class="left">{{ languageCon.excavated }}<br><span id="total_mining"></span></div>
+			<div class="right">{{ languageCon.reward }}<br><span id="total_reward"></span></div>
+		</div>
+
+
+		<!--  -->
+		<div class="expc-my-node">
+			<p style="text-align: center;font-size: 15px;">{{ languageCon.my_account }}：
+				<span class="login_username_action" onclick="" id="login_username">{{ languageCon.no_login }}</span>
+<!--				<span style="display: none;" id="login_out_btn">[login out]</span>-->
+			</p>
+			<div style="display: none" class="user_is_login_show">
+				<br>
+				<p class="user_option">
+					<span style="width:100px;">EXPC {{ languageCon.number }}：</span>
+					<span id="expc_balance">0</span>
+				</p>
+				<p  class="user_option"><span style="width:100px;">{{ languageCon.revenue }}：</span><d id="mining_income">0</d></p>
+				<p  class="user_option"><span style="width:100px;">{{ languageCon.my_node }}：</span><d id="user_node_config">0</d></p>
+				<p  class="user_option"><span style="width:100px;">{{ languageCon.rewards }}：</span><d id="user_reward">0</d></p>
+				<p  class="user_option"><span style="width:100px;">{{ languageCon.quantity_mining }}：</span><d id="user_accountsm">0</d></p>
+				<p  class="user_option user_t_code_show"><span style="width:100px;">{{ languageCon.my_node_code }}：</span>
+					<d class="user_t_code_show" id="user_t_code">0</d></p>
+				<br>
+				<p class="user_t_code_show" style="text-align: center;color: #28ccfe;font-size: 15px;">{{ languageCon.node_code_link }}&nbsp;&nbsp;
+					<d onclick="copy_text('node_link')" style="color: #28ccfe;" class="user_t_code_show fa fa-copy"></d></p>
+				<p style="text-align: center;color: #fe566a;font-size: 15px;">
+					<d class="user_t_code_show" onclick="copy_text('node_link')" id="node_link"></d>
+				</p>
+			</div>
+		</div>
+		<p class="expc-title" onclick="scatter_up()">{{languageCon.become_node}}</p>
+		<ul class="expc-ul nodetype3"></ul>
+		<p class="expc-title">{{languageCon.proce_trend}}<img style="display:none;width: 14px;" src="./images/rising.png" alt=""></p>
+		<div class="expc-my-node text-center">
+			<div>
+				<p style="width: 50%;float: left;"><span style="">{{languageCon.today_price}}</span><br><span id="today_price_eos"></span></p>
+				<p style="width: 50%;float: left;"><span style="">{{languageCon.tomorrow_price}}</span><br><span id="next_price_eos"></span></p>
+
+			</div>
+		</div>
+
+		<a href="./exchange.html" class="expc-title2"><img style="    width: 29px;position: relative;top: 10px;" src="./images/money.png"> <b> {{languageCon.entry_exchange}}</b></a>
+		<p onclick="login_err()" class="expc-title">{{languageCon.investment}}</p>
+		<ul class="expc-investment" id="investment_list"></ul>
+		<button style="display: none;" onclick="alert_show('tran')" id="btn_tran" class="button">{{languageCon.purchase}} EXPC</button>
+		<button style="display: none;" onclick="alert_show('login')" id="btn_login" class="button">{{languageCon.login}}</button>
+	</div>
+</body>
+	<script type="text/javascript" src="./static/vue.min.js"></script>
+	<script type="text/javascript" src="./static/echarts.min.js"></script>
+<script type="text/javascript" src="./static/vue.data.js"></script>
+
+	<script type="text/javascript" src="./static/eos.js"></script>
+<script>
+
+</script>
+</html>
