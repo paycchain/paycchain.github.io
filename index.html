@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>EXPC</title>
+	<title>PAYC</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
 	<link rel="stylesheet" type="text/css" href="./static/eos.css">
 	<link rel="stylesheet" type="text/css" href="./font-awesome-4.7.0/css/font-awesome.css">
@@ -32,7 +32,7 @@
 		<input type="hidden" id="tran_eos_price">
 		<div style="display: none;" id="alert_login" class=" alert text-center" >
 			<div class="login">
-				<p class="login-title"><span style="line-height: 50px;">EXPC {{languageCon.login}}</span>
+				<p class="login-title"><span style="line-height: 50px;">PAYC {{languageCon.login}}</span>
 					<span onclick="alert_hide('login');"
 						  style="font-size: 30px;float: right;margin:10px 20px 0 0;" class="fa fa-close"></span></p>
 				<div>
@@ -89,7 +89,7 @@
 			<!--<img onclick="alert_hide('tran')" style="width: 35px;" src="./images/close.png">-->
 		</div>
 		<!--  -->
-		<div class="" style="padding: 20px 0;font-size: 20px;"><b>EXPC</b></div>
+		<div class="" style="padding: 20px 0;font-size: 20px;"><b>PAYC</b></div>
 		<div style="padding: 0 0 30px 0;font-size: 14px; color: #6e6e6e;">
 			<a id="white_paper" download href="" style="color:#1c1c1c;text-decoration: none;margin: 0 10px 0 0;">{{languageCon.white_paper}}</a>|
 			<span style="margin: 0 10px;" @click="languageTab('Chinese')">中文</span>|
@@ -169,7 +169,7 @@
 			<div style="display: none" class="user_is_login_show">
 				<br>
 				<p class="user_option">
-					<span style="width:100px;">EXPC {{ languageCon.number }}：</span>
+					<span style="width:100px;">PAYC {{ languageCon.number }}：</span>
 					<span id="expc_balance">0</span>
 				</p>
 				<p  class="user_option"><span style="width:100px;">{{ languageCon.revenue }}：</span><d id="mining_income">0</d></p>
@@ -200,7 +200,7 @@
 		<a href="./exchange.html" class="expc-title2"><img style="    width: 29px;position: relative;top: 10px;" src="./images/money.png"> <b> {{languageCon.entry_exchange}}</b></a>
 		<p onclick="login_err()" class="expc-title">{{languageCon.investment}}</p>
 		<ul class="expc-investment" id="investment_list"></ul>
-		<button style="display: none;" onclick="alert_show('tran')" id="btn_tran" class="button">{{languageCon.purchase}} EXPC</button>
+		<button style="display: none;" onclick="alert_show('tran')" id="btn_tran" class="button">{{languageCon.purchase}} PAYC</button>
 		<button style="display: none;" onclick="alert_show('login')" id="btn_login" class="button">{{languageCon.login}}</button>
 	</div>
 </body>
