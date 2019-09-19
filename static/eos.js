@@ -13,8 +13,8 @@ let pre = document.getElementsByTagName('pre')[0];
 // var chainId='e70aaab8997e1dfce58fbfac80cbbb8fecec7b99cf982a9444273cbc64c41473';
 // const rpc = new eosjs_jsonrpc.JsonRpc('https://jungle2.cryptolions.io');
 // const rpc2 = new eosjs_jsonrpc.JsonRpc('https://jungle2.cryptolions.io');
-var contract_code='expc11111111';
-var contract_scope='expc11111111';
+var contract_code='paymentcoin1';
+var contract_scope='paymentcoin1';
 var contract_currency='EXPC';
 var chainId='e70aaab8997e1dfce58fbfac80cbbb8fecec7b99cf982a9444273cbc64c41473';
 const rpc = new eosjs_jsonrpc.JsonRpc('https://eos.greymass.com');
@@ -512,7 +512,7 @@ function expcinfo2() {
         try {
             const ret2 = await rpc2.get_table_rows({
                 code: contract_code,
-                table: 'expcinfo2',
+                table: 'paycinfo',
                 scope: contract_scope,
             })
 
@@ -915,7 +915,8 @@ function investment(data){
 }
 white_paper();
 function white_paper() {
-    var pdf = location.protocol +'//'+ location.host+'/pdf/payc.pdf';
+    var isLanguage= localStorage.getItem("isLanguage");
+    var pdf = location.protocol +'//'+ location.host+'/pdf/EosExpc'+ isLanguage +'.pdf';
     $("#white_paper").attr('href',pdf);
 }
 
