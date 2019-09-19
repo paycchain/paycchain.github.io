@@ -15,7 +15,7 @@ let pre = document.getElementsByTagName('pre')[0];
 // const rpc2 = new eosjs_jsonrpc.JsonRpc('https://jungle2.cryptolions.io');
 var contract_code='paymentcoin1';
 var contract_scope='paymentcoin1';
-var contract_currency='EXPC';
+var contract_currency='PAYC';
 var chainId='aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906';
 const rpc = new eosjs_jsonrpc.JsonRpc('https://eos.greymass.com');
 const rpc2 = new eosjs_jsonrpc.JsonRpc('https://eos.greymass.com');
@@ -904,7 +904,7 @@ function investment(data){
         '<div class="li li-1 white" style="">'+vm.languageCon.the_first+ '<br>'  + sort + '<br>' + vm.languageCon.round +'</div>' +
         '<div class="li li-2"><div class="top">' +
         '<div class="left text-center ">' +
-        '<span class="blue font-14">'+data.current_quantity+' EXPC</span>' +
+        '<span class="blue font-14">'+data.current_quantity+' PAYC</span>' +
         '<br><span>'+vm.languageCon.residual+'</span></div>' +
         '<div class="right text-center">' +
         '<span class="font-20 orange">'+start_price_usdt+' USDT</span>' +
